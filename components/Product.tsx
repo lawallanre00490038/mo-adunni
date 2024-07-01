@@ -27,7 +27,7 @@ const Product: FC<ProductProps> = ({ product: { image, name, slug, price } }) =>
           ) : (
             <div className='product-card'>
               <Link href={`/product/${slug.current}/0`}>
-                <img src={urlForImage(image[0])} alt={name} className='product-image w-[300px] h-[300px]' />
+                <Image src={urlForImage(image[0])} alt={name} className='product-image w-[300px] h-[300px]' />
                 <p className='product-name'>{name}</p>
                 <p className='product-price'>N{price}</p>
               </Link>
