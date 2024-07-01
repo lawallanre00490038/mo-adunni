@@ -24,7 +24,7 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ heroBanner }) => {
             <h3>{heroBanner.midText}</h3>
             <h1 className='pl-0'>{heroBanner.largeText1}</h1>
             
-            <img src={urlForImage(heroBanner.image)} 
+            <Image src={urlForImage(heroBanner.image)} 
             width={250}
             height={250}
             alt="ready-to-wear"  className='hero-banner-image'/>

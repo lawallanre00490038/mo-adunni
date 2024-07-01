@@ -9,7 +9,7 @@ const Navbar = () => {
     <div className='navbar-container z-10'>
       <p className='logo'>
         <Link href="/" className='logo'>
-          Mo'Adunni Empire
+          Mo&apos;Adunni Empire
         </Link>
       </p>
 
