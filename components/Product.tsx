@@ -17,7 +17,9 @@ const Product: FC<ProductProps> = ({ product: { image, name, slug, price } }) =>
               {image.map((innerImg: any, index: any) => (
                 <div key={index} className='product-card'>
                   <Link href={`/product/${slug.current}/${index}`}>
-                    <Image src={urlForImage(innerImg)} alt={name} className='product-image w-[300px] h-[300px]' />
+                    <Image src={urlForImage(innerImg)} alt={name} className='product-image w-[300px] h-[300px]' 
+                    width={300} height={300}
+                    />
                     <p className='product-name'>{name}</p>
                     <p className='product-price'>N{price}</p>
                   </Link>
@@ -27,7 +29,9 @@ const Product: FC<ProductProps> = ({ product: { image, name, slug, price } }) =>
           ) : (
             <div className='product-card'>
               <Link href={`/product/${slug.current}/0`}>
-                <Image src={urlForImage(image[0])} alt={name} className='product-image w-[300px] h-[300px]' />
+                <Image src={urlForImage(image[0])} alt={name} className='product-image w-[300px] h-[300px]' 
+                width={300} height={300}
+                />
                 <p className='product-name'>{name}</p>
                 <p className='product-price'>N{price}</p>
               </Link>
