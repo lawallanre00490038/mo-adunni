@@ -26,7 +26,7 @@
 import { createClient, groq } from "next-sanity";
 
 const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || "qaxhccid",
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
   apiVersion: "2024-06-29",
   token: process.env.NEXT_PUBLIC_SANITY_API_TOKEN,
