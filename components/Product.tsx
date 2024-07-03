@@ -9,15 +9,17 @@ interface ProductProps {
   product: SanityDocument;
 }
 
-const Product: FC<ProductProps> = ({ product: { image, name, slug, price } }) => {
+const Product: FC<ProductProps> = ({ product: { images, name, slug, price } }) => {
+
+  console.log("Product", images)
   return (
     <div>
-          {image.length > 1 ? (
+          {images.length > 1 ? (
             <div className='grid grid-cols-1 sm:grid-cols-3 gap-x-3'>
-              {image.map((innerImg: any, index: any) => (
+              {images.map((innerImg: any, index: any) => (
                 <div key={index} className='product-card'>
                   <Link href={`/product/${slug.current}/${index}`}>
-                    <Image src={urlForImage(innerImg)} alt={name} className='product-image w-[300px] h-[300px]' 
+                    <Image src={urlForImage(innerImg)} alt={name} className='product-image h-[300px] w-[300px]' 
                     width={300} height={300}
                     />
                     <p className='product-name'>{name}</p>
@@ -29,7 +31,7 @@ const Product: FC<ProductProps> = ({ product: { image, name, slug, price } }) =>
           ) : (
             <div className='product-card'>
               <Link href={`/product/${slug.current}/0`}>
-                <Image src={urlForImage(image[0])} alt={name} className='product-image w-[300px] h-[300px]' 
+                <Image src={urlForImage(images[0])} alt={name} className='product-image h-[300px] w-[300px]' 
                 width={300} height={300}
                 />
                 <p className='product-name'>{name}</p>

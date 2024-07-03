@@ -15,7 +15,7 @@ const FooterBanner: React.FC<FooterBanner> = ({ footerBanner }: FooterBanner) =>
   }
 
   return (
-    <div className='footer-banner-container'>
+    <div className='footer-banner-container  mt-6'>
       <div className='banner-desc'>
         <div className='left'>
           <p>{footerBanner.discount}</p>

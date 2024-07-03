@@ -1,19 +1,26 @@
 import { HeroBanner, Footer, FooterBanner, Cart, Product } from '@/components'
 import { SanityDocument } from "next-sanity"
 import { sanityFetch } from "@/sanity/lib/fetch"
-import { PRODUCTS_QUERY, BANNER_QUERY } from "@/sanity/lib/queries"
 
+
+import { getProducts, getBanner } from '@/actions/getProduct'
 
 const Home =  async ( ) => {
 
-  const productsData = await sanityFetch<SanityDocument[]>({
-    query: PRODUCTS_QUERY,
-  })
+  // const productsData = await sanityFetch<SanityDocument[]>({
+  //   query: PRODUCTS_QUERY,
+  // })
 
-  const bannerData = await sanityFetch<SanityDocument[]>({
-    query: BANNER_QUERY,
-  })
+  // const bannerData = await sanityFetch<SanityDocument[]>({
+  //   query: BANNER_QUERY,
+  // })
+
+  const productsData = await getProducts();
+  console.log("products the page file", productsData)
   
+
+  const bannerData = await getBanner();
+  console.log("banner the page file", bannerData)
 
   return (
     <>
@@ -25,7 +32,7 @@ const Home =  async ( ) => {
       </div>
 
       <div className='products-container'>
-        {productsData?.map((product, index)=> <Product key={index} product={product} />)}
+        {productsData?.map((product: any, index: any)=> <Product key={index} product={product} />)}
       </div>
 
       <FooterBanner footerBanner={bannerData.length ? bannerData[0] : undefined}/>
