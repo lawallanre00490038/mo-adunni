@@ -59,7 +59,7 @@ const ProductDetails = () => {
                         ))
                     }
                     
-                    {/* <div className='small-images-container'>
+                    <div className='small-images-container'>
                         {images?.map((item: any, idx: any)=>(
                             <Image src={urlForImage(item)} alt="images" 
                             key={idx}
@@ -68,7 +68,7 @@ const ProductDetails = () => {
                             onMouseEnter={() => alert("Mouse Enter")}
                             />
                         ))}
-                    </div> */}
+                    </div>
 
                 </div>
                 <div className='product-details-desc'>
