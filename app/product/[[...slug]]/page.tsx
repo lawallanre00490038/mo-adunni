@@ -49,7 +49,7 @@ const ProductDetails = () => {
                 <div>
                     
                     {images && images
-                        .filter((_, idx: any) => idx === parsedIndex)
+                        .filter((_: any, idx: any) => idx === parsedIndex)
                         .map((image: any) => (
                             <div className='image-container' key={parsedIndex}>
                                 <Image src={urlForImage(image)} alt="images" className='product-image h-[300px] w-[300px]' 
