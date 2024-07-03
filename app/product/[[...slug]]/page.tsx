@@ -7,18 +7,20 @@ import { getProductDetails, getSimilarProducts } from '@/actions/getProduct';
 import { SanityDocument } from '@sanity/client';
 import { urlForImage } from '@/sanity/lib/image';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import Product from '@/components/Product';
 
 
 const ProductDetails = () => {
 
 
     const [product, setProduct] = useState<SanityDocument[]>([]);
-    const { images, name, price } = product[0] || {};
+    const { images, name, price, details } = product[0] || {};
+    const [ idx, setIdx ] = useState(0);
 
     const { slug } = useParams();
-    const [itemSlug, index] = slug;
+    const [itemSlug, slug_num] = slug;
 
-    const parsedIndex = Number(index);
+    const parsedIndex = Number(slug_num);
 
     async function getProducts(itemSlug: string ) {
         const product = await getProductDetails({ slug: itemSlug });
@@ -38,55 +40,77 @@ const ProductDetails = () => {
 
 
     useEffect(() => {
-    }, [product, index]);
-
-    console.log("Product", product)
-
+    }, [product, slug_num]);
     
-    return (
+    return  (
         <div>
-            <div className='product-detail-container'>
-                <div>
-                    
-                    {images && images
-                        .filter((_: any, idx: any) => idx === parsedIndex)
-                        .map((image: any) => (
-                            <div className='image-container' key={parsedIndex}>
-                                <Image src={urlForImage(image)} alt="images" className='product-image h-[300px] w-[300px]' 
-                                    width={300} height={300}
-                                />
-                            </div>
-                        ))
-                    }
-                    
-                    <div className='small-images-container'>
-                        {images?.map((item: any, idx: any)=>(
-                            <Image src={urlForImage(item)} alt="images" 
-                            key={idx}
-                            width={100} height={50}
-                            className='' 
-                            onMouseEnter={() => alert("Mouse Enter")}
+          <div className="product-detail-container">
+            <div>
+               {images && images
+                .filter((_: any, idx: any) => idx === parsedIndex)
+                    .map((image: any) => (
+                        <div className='image-container' key={parsedIndex}>
+                            <img src={urlForImage(image)} alt="images" className='product-detail-image' 
                             />
-                        ))}
-                    </div>
-
-                </div>
-                <div className='product-details-desc'>
-                    <h1>{name}</h1>
-                    <div className='reviews'>
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiFillStar />
-                        <AiOutlineStar />
-                    </div>
-                    <p>
-                        (20)
-                    </p>
-                </div>
+                        </div>
+                    ))
+                }
+              <div className="small-images-container">
+                {images?.map((item: any, i: any) => (
+                  <img 
+                    key={i}
+                    src={urlForImage(item)}
+                    className={i === idx ? 'small-image selected-image' : 'small-image'}
+                    onMouseEnter = {() => setIdx(i)}
+                  />
+                ))}
+              </div>
             </div>
+    
+            <div className="product-detail-desc">
+              <h1>{name}</h1>
+              <div className="reviews">
+                <div>
+                  <AiFillStar />
+                  <AiFillStar />
+                  <AiFillStar />
+                  <AiFillStar />
+                  <AiOutlineStar />
+                </div>
+                <p>
+                  (20)
+                </p>
+              </div>
+              <h4>Details: </h4>
+              <p>{details}</p>
+              <p className="price">N{price}</p>
+              <div className="quantity">
+                <h3>Quantity:</h3>
+                <p className="quantity-desc">
+                  <span className="minus" onClick={()=> "onclick"}><AiOutlineMinus /></span>
+                  <span className="num">0</span>
+                  <span className="plus" onClick={()=> "onclick"}><AiOutlinePlus /></span>
+                </p>
+              </div>
+              <div className="buttons">
+                <button type="button" className="add-to-cart" onClick={() => ()=> "onclick"}>Add to Cart</button>
+                <button type="button" className="buy-now" onClick={()=> "onclick"}>Buy Now</button>
+              </div>
+            </div>
+          </div>
+    
+          <div className="maylike-products-wrapper">
+              <h2>You may also like</h2>
+              <div className="marquee">
+                <div className="maylike-products-container track">
+                  {product.map((item) => (
+                    <Product key={item._id} product={item} />
+                  ))}
+                </div>
+              </div>
+          </div>
         </div>
-    );
+      );
 };
 
 export default ProductDetails;

@@ -15,7 +15,7 @@ const Product: FC<ProductProps> = ({ product: { images, name, slug, price } }) =
   return (
     <div>
           {images.length > 1 ? (
-            <div className='grid grid-cols-1 sm:grid-cols-3 gap-x-3'>
+            <div className='products-container'>
               {images.map((innerImg: any, index: any) => (
                 <div key={index} className='product-card'>
                   <Link href={`/product/${slug.current}/${index}`}>
