@@ -11,7 +11,6 @@ interface ProductProps {
 
 const Product: FC<ProductProps> = ({ product: { images, name, slug, price } }) => {
 
-  console.log("Product", images)
   return (
     <div>
           {images.length > 1 ? (

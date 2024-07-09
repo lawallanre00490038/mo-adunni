@@ -8,6 +8,7 @@ import { SanityDocument } from '@sanity/client';
 import { urlForImage } from '@/sanity/lib/image';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import Product from '@/components/Product';
+import { useStateContext } from '@/context/StateContext';
 
 
 const ProductDetails = () => {
@@ -16,11 +17,14 @@ const ProductDetails = () => {
     const [product, setProduct] = useState<SanityDocument[]>([]);
     const { images, name, price, details } = product[0] || {};
     const [ idx, setIdx ] = useState(0);
+    const { decQty, incQty, qty, onAdd } = useStateContext();
+
 
     const { slug } = useParams();
     const [itemSlug, slug_num] = slug;
-
     const parsedIndex = Number(slug_num);
+
+
 
     async function getProducts(itemSlug: string ) {
         const product = await getProductDetails({ slug: itemSlug });
@@ -87,13 +91,13 @@ const ProductDetails = () => {
               <div className="quantity">
                 <h3>Quantity:</h3>
                 <p className="quantity-desc">
-                  <span className="minus" onClick={()=> "onclick"}><AiOutlineMinus /></span>
-                  <span className="num">0</span>
-                  <span className="plus" onClick={()=> "onclick"}><AiOutlinePlus /></span>
+                  <span className="minus" onClick={decQty}><AiOutlineMinus /></span>
+                  <span className="num">{qty}</span>
+                  <span className="plus" onClick={incQty}><AiOutlinePlus /></span>
                 </p>
               </div>
               <div className="buttons">
-                <button type="button" className="add-to-cart" onClick={() => ()=> "onclick"}>Add to Cart</button>
+                <button type="button" className="add-to-cart" onClick={() => onAdd(product[0], qty)}>Add to Cart</button>
                 <button type="button" className="buy-now" onClick={()=> "onclick"}>Buy Now</button>
               </div>
             </div>
