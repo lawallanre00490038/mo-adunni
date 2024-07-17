@@ -14,7 +14,7 @@ import { useStateContext } from '@/context/StateContext';
 const ProductDetails = () => {
 
 
-    const [product, setProduct] = useState<SanityDocument[]>([]);
+    const [product, setProduct] = useState([]);
     const { images, name, price, details } = product[0] || {};
     const [ idx, setIdx ] = useState(0);
     const { decQty, incQty, qty, onAdd } = useStateContext();
@@ -26,7 +26,7 @@ const ProductDetails = () => {
 
 
 
-    async function getProducts(itemSlug: string ) {
+    async function getProducts(itemSlug ) {
         const product = await getProductDetails({ slug: itemSlug });
             return { product };
     };
@@ -51,8 +51,8 @@ const ProductDetails = () => {
           <div className="product-detail-container">
             <div>
                {images && images
-                .filter((_: any, idx: any) => idx === parsedIndex)
-                    .map((image: any) => (
+                .filter((_, idx) => idx === parsedIndex)
+                    .map((image) => (
                         <div className='image-container' key={parsedIndex}>
                             <img src={urlForImage(image)} alt="images" className='product-detail-image' 
                             />
@@ -60,7 +60,7 @@ const ProductDetails = () => {
                     ))
                 }
               <div className="small-images-container">
-                {images?.map((item: any, i: any) => (
+                {images?.map((item, i) => (
                   <img 
                     key={i}
                     src={urlForImage(item)}
