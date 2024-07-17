@@ -24,6 +24,6 @@
     },
     "target": "ES2017"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/page.tsx", "sanity/test.js", "sanity/schemas/index.ts", "context/StateContext.jsx", "components/Navbar.jsx", "components/Cart.js", "app/product/[[...slug]]/page.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/page.tsx", "sanity/test.js", "sanity/schemas/index.ts", "context/StateContext.tsx", "components/Navbar.jsx", "components/Cart.js", "app/product/[[...slug]]/page.js", "components/Product.tsx"],
   "exclude": ["node_modules"]
 }
